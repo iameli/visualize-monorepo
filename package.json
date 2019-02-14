@@ -1,0 +1,15 @@
+{
+  "name": "visualize-monorepo",
+  "version": "0.0.1",
+  "description": "Visualize monorepo dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "get-monorepo-packages": "^1.1.0"
+  }
+}
