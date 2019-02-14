@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body,
+      main {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main></main>
+    <script src="./client.js"></script>
+    <script>
+      const dot = `
+        digraph graphname {
+          rankdir="LR";
+
+          node [shape=rect]
+          "@livepeer/apollo"
+      "@livepeer/apollo" -> "@livepeer/graphql-sdk"
+      "@livepeer/apollo" -> "@livepeer/sdk"
+      "@livepeer/chroma"
+      "@livepeer/explorer"
+      "@livepeer/explorer" -> "@livepeer/apollo"
+      "@livepeer/explorer" -> "@livepeer/graphql-sdk"
+      "@livepeer/explorer" -> "@livepeer/merkle-miner"
+      "@livepeer/graphql-sdk"
+      "@livepeer/graphql-sdk" -> "@livepeer/sdk"
+      "@livepeer/lpx"
+      "@livepeer/lpx" -> "@livepeer/sdk"
+      "@livepeer/merkle-miner"
+      "@livepeer/player"
+      "@livepeer/player" -> "@livepeer/apollo"
+      "@livepeer/sdk"
+      "@livepeer/subgraph"
+
+        }
+      `;
+      const { width, height } = document
+        .querySelector("main")
+        .getClientRects()[0];
+      d3.select("main")
+        .graphviz()
+        .width(Math.floor(width))
+        .height(Math.floor(height))
+        .fit(true)
+        .renderDot(dot);
+    </script>
+  </body>
+</html>
