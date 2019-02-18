@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 const path = require("path");
-const dir = process.argv[2] || process.cwd();
 const template = require("./template.js");
 const tmp = require("tmp");
 const opn = require("opn");
-
 const fs = require("fs-extra");
 const getPackages = require("get-monorepo-packages");
-const packages = getPackages(dir);
-const allPackages = new Set();
-packages.forEach(({ package }) => {
-  allPackages.add(package.name);
-});
-const dot = `
+
+module.exports = function(dir) {
+  const packages = getPackages(dir);
+  const allPackages = new Set();
+  packages.forEach(({ package }) => {
+    allPackages.add(package.name);
+  });
+  const dot = `
   digraph graphname {
     rankdir="LR";
 
@@ -32,14 +32,20 @@ const dot = `
 
   }
 `;
-const clientScript = fs.readFileSync(
-  path.resolve(__dirname, "dist", "client.js"),
-  "utf8"
-);
-const output = template({
-  clientScript,
-  dot
-});
-var tmpFile = `${tmp.tmpNameSync()}.html`;
-fs.writeFileSync(tmpFile, output, "utf8");
-opn(tmpFile);
+  const clientScript = fs.readFileSync(
+    path.resolve(__dirname, "dist", "client.js"),
+    "utf8"
+  );
+  const output = template({
+    clientScript,
+    dot
+  });
+  var tmpFile = `${tmp.tmpNameSync()}.html`;
+  fs.writeFileSync(tmpFile, output, "utf8");
+  opn(tmpFile, { wait: false });
+};
+
+if (!module.parent) {
+  const dir = process.argv[2] || process.cwd();
+  module.exports(dir);
+}
