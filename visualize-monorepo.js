@@ -1,6 +1,9 @@
 #!/usr/bin/env node
-
+const path = require("path");
 const dir = process.argv[2] || process.cwd();
+const template = require("./template.js");
+const tmp = require("tmp");
+const opn = require("opn");
 
 const fs = require("fs-extra");
 const getPackages = require("get-monorepo-packages");
@@ -9,7 +12,7 @@ const allPackages = new Set();
 packages.forEach(({ package }) => {
   allPackages.add(package.name);
 });
-console.log(`
+const dot = `
   digraph graphname {
     rankdir="LR";
 
@@ -28,4 +31,15 @@ console.log(`
       .join("\n")}
 
   }
-`);
+`;
+const clientScript = fs.readFileSync(
+  path.resolve(__dirname, "dist", "client.js"),
+  "utf8"
+);
+const output = template({
+  clientScript,
+  dot
+});
+var tmpFile = `${tmp.tmpNameSync()}.html`;
+fs.writeFileSync(tmpFile, output, "utf8");
+opn(tmpFile);

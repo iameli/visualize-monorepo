@@ -4,13 +4,15 @@
   "description": "Visualize monorepo dependencies",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "parcel build client.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "fs-extra": "^7.0.1",
-    "get-monorepo-packages": "^1.1.0"
+    "get-monorepo-packages": "^1.1.0",
+    "opn": "^5.4.0",
+    "tmp": "0.0.33"
   },
   "devDependencies": {
     "d3": "^5.9.1",
