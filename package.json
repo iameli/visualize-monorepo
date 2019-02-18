@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "Visualize monorepo dependencies",
   "main": "index.js",
+  "bin": {
+    "visualize-monorepo": "visualize-monorepo.js"
+  },
   "scripts": {
     "prepare": "parcel build client.js"
   },
