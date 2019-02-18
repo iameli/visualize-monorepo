@@ -1,6 +1,6 @@
 {
   "name": "visualize-monorepo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Visualize monorepo dependencies",
   "main": "index.js",
   "bin": {
