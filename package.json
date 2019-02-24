@@ -7,7 +7,8 @@
     "visualize-monorepo": "./visualize-monorepo.js"
   },
   "scripts": {
-    "prepare": "parcel build client.js"
+    "build-viz:deps": "cd node_modules/viz.js && make deps",
+    "build-viz:all": "mkdir -p node_modules/viz.js/node_modules && rm -rf node_modules/viz.js/node_modules/.bin && ln -s $PWD/node_modules/.bin node_modules/viz.js/node_modules/.bin && cd node_modules/viz.js && make all"
   },
   "author": "",
   "license": "MIT",
@@ -16,16 +17,21 @@
     "get-monorepo-packages": "^1.1.0",
     "opn": "^5.4.0",
     "tmp": "0.0.33",
-    "viz.js": "^2.1.2"
+    "viz.js": "git+https://github.com/iameli/viz.js.git#37683c63c9835b1a740dbe4f7507e4c7e6aae93b"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "@babel/preset-env": "^7.3.1",
     "d3": "^5.9.1",
     "d3-graphviz": "^2.6.1",
-    "parcel": "^1.11.0"
+    "parcel": "^1.11.0",
+    "rollup": "^1.2.3",
+    "rollup-plugin-babel": "^4.3.2"
   },
-  "browserslist": ["last 2 chrome versions"]
+  "browserslist": [
+    "last 2 chrome versions"
+  ]
 }
