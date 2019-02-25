@@ -12,7 +12,8 @@
     "start": "mkdir -p dist && cp node_modules/viz.js/build-lite/module* dist && run-p 'start:**'",
     "start:worker": "parcel watch src/worker.js",
     "start:main": "parcel watch src/index.html",
-    "start:server": "cd dist && live-server"
+    "start:server": "cd dist && live-server",
+    "build": "parcel build src/worker.js && parcel build src/index.html && parcel build src/cloudflare-worker.js"
   },
   "author": "",
   "license": "MIT",

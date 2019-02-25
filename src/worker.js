@@ -1,10 +1,10 @@
 import render from "./render";
 
-console.log("worker here");
-
-self.skipWaiting().then(function() {
-  console.log("skip waiting i'm active");
-});
+if (typeof self.skipWaiting === "function") {
+  self.skipWaiting().then(function() {
+    console.log("skip waiting i'm active");
+  });
+}
 
 self.addEventListener("fetch", event => {
   event.respondWith(fetchAndApply(event.request));
