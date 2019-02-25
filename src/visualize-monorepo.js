@@ -3,14 +3,14 @@ const path = require("path");
 const tmp = require("tmp");
 const opn = require("opn");
 const fs = require("fs-extra");
-const render = require("./render");
+import render from "./render";
 const getPackages = require("get-monorepo-packages");
 
 module.exports = async function(dir) {
   const packages = getPackages(dir);
   const allPackages = new Set();
-  packages.forEach(({ package }) => {
-    allPackages.add(package.name);
+  packages.forEach(({ package: pkg }) => {
+    allPackages.add(pkg.name);
   });
   const dot = `
   digraph graphname {
@@ -18,14 +18,14 @@ module.exports = async function(dir) {
 
     node [shape=rect]
     ${packages
-      .map(({ package }) => {
+      .map(({ package: pkg }) => {
         const lines = [];
-        lines.push(`"${package.name}"`);
+        lines.push(`"${pkg.name}"`);
         const allDeps = [
-          ...Object.keys(package.dependencies || {}),
-          ...Object.keys(package.devDependencies || {})
+          ...Object.keys(pkg.dependencies || {}),
+          ...Object.keys(pkg.devDependencies || {})
         ].filter(dep => allPackages.has(dep));
-        lines.push(...allDeps.map(dep => `"${package.name}" -> "${dep}"`));
+        lines.push(...allDeps.map(dep => `"${pkg.name}" -> "${dep}"`));
         return lines.join("\n");
       })
       .join("\n")}

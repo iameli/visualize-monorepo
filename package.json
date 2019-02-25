@@ -8,11 +8,16 @@
   },
   "scripts": {
     "build-viz:deps": "cd node_modules/viz.js && make deps",
-    "build-viz:all": "mkdir -p node_modules/viz.js/node_modules && rm -rf node_modules/viz.js/node_modules/.bin && ln -s $PWD/node_modules/.bin node_modules/viz.js/node_modules/.bin && cd node_modules/viz.js && make all"
+    "build-viz:all": "mkdir -p node_modules/viz.js/node_modules && rm -rf node_modules/viz.js/node_modules/.bin && ln -s $PWD/node_modules/.bin node_modules/viz.js/node_modules/.bin && cd node_modules/viz.js && make all",
+    "start": "mkdir -p dist && cp node_modules/viz.js/build-lite/module* dist && run-p 'start:**'",
+    "start:worker": "parcel watch src/worker.js",
+    "start:main": "parcel watch src/index.html",
+    "start:server": "cd dist && live-server"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "esm": "^3.2.6",
     "fs-extra": "^7.0.1",
     "get-monorepo-packages": "^1.1.0",
     "opn": "^5.4.0",
@@ -27,6 +32,7 @@
     "@babel/preset-env": "^7.3.1",
     "d3": "^5.9.1",
     "d3-graphviz": "^2.6.1",
+    "npm-run-all": "^4.1.5",
     "parcel": "^1.11.0",
     "rollup": "^1.2.3",
     "rollup-plugin-babel": "^4.3.2"
