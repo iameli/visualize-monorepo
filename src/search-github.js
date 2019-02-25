@@ -42,7 +42,7 @@ export default async function searchGithub(repo) {
   return output;
 }
 
-if (!module.parent) {
+if (typeof module !== "undefined" && !module.parent) {
   searchGithub(process.argv[2]).then(pkgs =>
     console.log(JSON.stringify(pkgs, null, 2))
   );

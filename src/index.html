@@ -3,6 +3,7 @@
   <head> </head>
 
   <body>
+    <input id="repo" value="github/livepeer/livepeerjs" />
     <button>Do it!</button>
     <div id="display"></div>
     <script>
@@ -51,7 +52,7 @@
       registerValidSW("/worker.js");
 
       document.querySelector("button").addEventListener("click", async () => {
-        const res = await fetch("/file.svg");
+        const res = await fetch(`${document.querySelector("#repo").value}.svg`);
         const text = await res.text();
         document.querySelector("#display").innerHTML = text;
       });
