@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-API_KEY="9ddf17fb2ecd991757f27d6c20c356d0e8fe9"
+API_KEY="$(cat /keybase/team/streamplace_team/secrets/cloudflare-api-key.txt)"
 API_EMAIL="money@stream.place"
 ZONE_ID="b57ced40b3a7df35ee2e6a84862e5f07"
 
