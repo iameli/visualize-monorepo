@@ -21,6 +21,8 @@
     "esm": "^3.2.6",
     "fs-extra": "^7.0.1",
     "get-monorepo-packages": "^1.1.0",
+    "isomorphic-base64": "^1.0.2",
+    "isomorphic-fetch": "^2.2.1",
     "opn": "^5.4.0",
     "tmp": "0.0.33",
     "viz.js": "git+https://github.com/iameli/viz.js.git#37683c63c9835b1a740dbe4f7507e4c7e6aae93b"
